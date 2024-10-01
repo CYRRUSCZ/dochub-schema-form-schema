@@ -49,15 +49,15 @@
                 },
                 "left": {
                     "description": "left side of expression",
-                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json#/definitions/ruleToken"
                 },
                 "right": {
                     "description": "right side of expression",
-                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json#/definitions/ruleToken"
                 },
                 "operator": {
                     "description": "operator between sides of expression",
-                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json#/definitions/ruleToken"
                 }
             },
             "if": {

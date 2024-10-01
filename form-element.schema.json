@@ -79,7 +79,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "validation-rule.schema.json#/definitions/validationRule"
+                                "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/validation-rule.schema.json#/definitions/validationRule"
                             }
                         ]
                     }
@@ -119,7 +119,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "rule-group.schema.json#/definitions/ruleGroup"
+                                "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-group.schema.json#/definitions/ruleGroup"
                             }
                         ]
                     }

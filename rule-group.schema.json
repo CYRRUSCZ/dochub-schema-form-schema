@@ -16,15 +16,15 @@
                 },
                 "left": {
                     "description": "Left side of expression",
-                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json#/definitions/ruleToken"
                 },
                 "right": {
                     "description": "Right side of expression",
-                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json#/definitions/ruleToken"
                 },
                 "operator": {
                     "description": "Defines operator between expression sides",
-                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json#/definitions/ruleToken"
                 }
             }
         }

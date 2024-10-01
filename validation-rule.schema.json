@@ -38,7 +38,7 @@
                 },
                 "ruleExpression": {
                     "description": "Rule expression blueprint",
-                    "$ref": "rule-group.schema.json#/definitions/ruleGroup"
+                    "$ref": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-group.schema.json#/definitions/ruleGroup"
                 }
             },
             "if": {
