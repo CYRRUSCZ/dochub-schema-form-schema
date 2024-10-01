@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://localhost:8080/static/schema/rule-group.schema.json",
+    "title": "Visibility Rule for form element",
+    "description": "Vue form element visibility rule json schema for form generator",
+    "type": "object",
+    "definitions": {
+        "ruleGroup": {
+            "properties": {
+                "tokenType": {
+                    "description": "Defines type of rule group",
+                    "type": "string",
+                    "enum": [
+                        "group"
+                    ]
+                },
+                "left": {
+                    "description": "Left side of expression",
+                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                },
+                "right": {
+                    "description": "Right side of expression",
+                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                },
+                "operator": {
+                    "description": "Defines operator between expression sides",
+                    "$ref": "rule-token.schema.json#/definitions/ruleToken"
+                }
+            }
+        }
+    }
+}

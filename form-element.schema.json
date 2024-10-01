@@ -1,0 +1,193 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://localhost:8080/static/schema/form-element.schema.json",
+    "title": "Form element",
+    "description": "Vue form element json schema for form generator",
+    "type": "object",
+    "definitions": {
+        "formElement": {
+            "properties": {
+                "elementId": {
+                    "description": "Form element html id attribute",
+                    "type": "string"
+                },
+                "elementType": {
+                    "description": "Type of form html element",
+                    "type": "string",
+                    "enum": [
+                        "text",
+                        "date",
+                        "textarea",
+                        "number",
+                        "select",
+                        "email",
+                        "radio",
+                        "checkbox",
+                        "checkboxGroup",
+                        "computedText",
+                        "investmentCategoriesSelector",
+                        "fileSelect",
+                        "imageRadio",
+                        "stockSelect",
+                        "etfWeight"
+                    ]
+                },
+                "elementLabel": {
+                    "description": "Label text for element",
+                    "type": "string"
+                },
+                "elementSize": {
+                    "description": "Optional size of element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "hasHint": {
+                    "description": "Toggles hint",
+                    "type": "boolean"
+                },
+                "elementHint": {
+                    "description": "Hint text under input element",
+                    "type": "string"
+                },
+                "customClasses": {
+                    "description": "Custom css class names",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vertical": {
+                    "description": "Vertical orientation of elements options",
+                    "type": "boolean"
+                },
+                "defaultValue": {
+                    "description": "Default value of element",
+                    "type": [
+                        "string",
+                        "integer",
+                        "boolean",
+                        "null",
+                        "number",
+                        "array"
+                    ]
+                },
+                "validationRules": {
+                    "description": "Rules for validating element value",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "validation-rule.schema.json#/definitions/validationRule"
+                            }
+                        ]
+                    }
+                },
+                "elementOptions": {
+                    "description": "Options for select or radio group",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "option": {
+                                "description": "Textual representation of value (ex. option for select)",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "String value for form element model",
+                                "type": "string"
+                            },
+                            "src": {
+                                "description": "Source image url for form element model",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "option",
+                            "value"
+                        ]
+                    }
+                },
+                "defaultVisible": {
+                    "description": "Default visibility state",
+                    "type": "boolean"
+                },
+                "visibilityRules": {
+                    "description": "Defines visibility states based on expression",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "rule-group.schema.json#/definitions/ruleGroup"
+                            }
+                        ]
+                    }
+                },
+                "selectPrompt": {
+                    "description": "Prompt message for select input element",
+                    "type": "string"
+                },
+                "portalId": {
+                    "description": "Form element portal id attribute",
+                    "type": "string"
+                },
+                "isComputed": {
+                    "description": "Indication if element value should be computed",
+                    "type": "boolean"
+                },
+                "computedValueExpression": {
+                    "description": "Definition of computed value expression",
+                    "type": "array"
+                },
+                "selectAnyFile": {
+                    "description": "Flag for selecting any file type for file select",
+                    "type": "boolean"
+                },
+                "hasStock": {
+                    "description": "Toggles stock selector",
+                    "type": "boolean"
+                },
+                "stockId": {
+                    "description": "Id of selected stock for stock select",
+                    "type": ["string", "null"]
+                }
+            },
+            "if": {
+                "properties": {
+                    "elementType": {
+                        "enum": [
+                            "text",
+                            "textarea",
+                            "number",
+                            "email",
+                            "checkbox",
+                            "date",
+                            "computedText",
+                            "fileSelect",
+                            "stockSelect",
+                            "etfWeight"
+                        ]
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "elementId",
+                    "elementType",
+                    "validationRules",
+                    "visibilityRules"
+                ]
+            },
+            "else": {
+                "required": [
+                    "elementId",
+                    "elementType",
+                    "validationRules",
+                    "visibilityRules",
+                    "elementOptions"
+                ]
+            }
+        }
+    }
+}
