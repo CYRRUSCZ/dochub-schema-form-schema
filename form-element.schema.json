@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://localhost:8080/static/schema/form-element.schema.json",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/form-element.schema.json",
     "title": "Form element",
     "description": "Vue form element json schema for form generator",
     "type": "object",

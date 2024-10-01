@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://localhost:8080/static/schema/validation-rule.schema.json",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/validation-rule.schema.json",
     "title": "Validation Rule for form element",
     "description": "Vue form element validation rule json schema for form generator",
     "type": "object",
