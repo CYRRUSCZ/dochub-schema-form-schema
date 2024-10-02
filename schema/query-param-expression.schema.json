@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/query-param-expression.schema.json",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/schema/query-param-expression.schema.json",
     "title": "DocHub Schema Form Query Param Expression JSON schema",
     "description": "This schema describes the query param expression structure used in form element schema.",
     "definitions": {

@@ -1,11 +1,72 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/schema/rule-token.schema.json",
     "title": "DocHub Schema Form Rule Token JSON schema",
     "description": "Common rule token schema used in visibility rules group, or expressions of form element schema.",
     "type": "object",
     "definitions": {
+        "groupSide": {
+            "oneOf": [
+                {
+                    "ref": "./rule-token.schema.json#/definitions/element"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/group"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/value"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/investmentProfiles"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/investmentCategories"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/valueFrom"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/arrayFrom"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/condition"
+                }
+            ]
+        },
         "ruleToken": {
+            "oneOf": [
+                {
+                    "ref": "./rule-token.schema.json#/definitions/element"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/value"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/group"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/operator"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/investmentProfiles"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/investmentCategories"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/valueFrom"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/arrayFrom"
+                },
+                {
+                    "ref": "./rule-token.schema.json#/definitions/condition"
+                }
+            ]
+        },
+        "element": {
+            "type": "object",
+            "description": "Element token, used for referencing other form element value in expression",
             "properties": {
                 "id": {
                     "description": "Optional unique identifier of token, has no meaning for rendering",
@@ -13,17 +74,38 @@
                 },
                 "tokenType": {
                     "description": "Defines type of token in expression",
-                    "type": "string",
-                    "enum": [
-                        "element",
-                        "value",
-                        "group",
-                        "operator",
-                        "investmentProfiles",
-                        "investmentCategories",
-                        "valueFrom",
-                        "arrayFrom"
+                    "const": "element"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": [
+                        "number",
+                        "boolean",
+                        "string"
                     ]
+                },
+                "elementId": {
+                    "description": "Element id of schema form element",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tokenType",
+                "value",
+                "elementId"
+            ]
+        },
+        "value": {
+            "type": "object",
+            "description": "Scalar value token",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "value"
                 },
                 "value": {
                     "description": "Value for use in expression",
@@ -41,123 +123,325 @@
                         "boolean",
                         "number"
                     ]
+                }
+            },
+            "required": [
+                "tokenType",
+                "value",
+                "valueType"
+            ]
+        },
+        "group": {
+            "type": "object",
+            "description": "Rule group token, used for grouping expression tokens in \"(\" \")\"",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "group"
+                },
+                "left": {
+                    "description": "left side of expression",
+                    "ref": "./rule-token.schema.json#/definitions/groupSide"
+                },
+                "right": {
+                    "description": "right side of expression",
+                    "ref": "./rule-token.schema.json#/definitions/groupSide"
+                },
+                "operator": {
+                    "description": "operator between sides of expression",
+                    "ref": ".#/definitions/operator"
+                }
+            },
+            "required": [
+                "tokenType",
+                "left",
+                "right",
+                "operator"
+            ]
+        },
+        "operator": {
+            "type": "object",
+            "description": "Operator token, mention that not all operators are supported in all contexts, for example: in computed value expression only arithmetic operators are supported",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "operator"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string",
+                    "enum": [
+                        "+",
+                        "-",
+                        "/",
+                        "*",
+                        "**",
+                        "%",
+                        ">",
+                        "<",
+                        ">=",
+                        "<=",
+                        "==",
+                        "===",
+                        "!=",
+                        "!==",
+                        "&&",
+                        "||",
+                        "IN",
+                        "NOT IN",
+                        "LENGTH ===",
+                        "LENGTH >=",
+                        "LENGTH <=",
+                        "EVERY IN",
+                        "SOME IN",
+                        "EVERY NOT IN",
+                        "SOME NOT IN"
+                    ]
+                }
+            },
+            "required": [
+                "tokenType",
+                "value"
+            ]
+        },
+        "computedValueOperator": {
+            "type": "object",
+            "description": "Operator token, mention that not all operators are supported in all contexts, for example: in computed value expression only arithmetic operators are supported",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "operator"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string",
+                    "enum": [
+                        "+",
+                        "-",
+                        "/",
+                        "*",
+                        "**",
+                        "%"
+                    ]
+                }
+            },
+            "required": [
+                "tokenType",
+                "value"
+            ]
+        },
+        "expressionOperator": {
+            "type": "object",
+            "description": "Operator token, mention that not all operators are supported in all contexts, for example: in computed value expression only arithmetic operators are supported",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "operator"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string",
+                    "enum": [
+                        "+",
+                        "-",
+                        "/",
+                        "*",
+                        "**",
+                        "%",
+                        ">",
+                        "<",
+                        ">=",
+                        "<=",
+                        "==",
+                        "===",
+                        "!=",
+                        "!==",
+                        "&&",
+                        "||",
+                        "IN",
+                        "NOT IN",
+                        "LENGTH ===",
+                        "LENGTH >=",
+                        "LENGTH <=",
+                        "EVERY IN",
+                        "SOME IN",
+                        "EVERY NOT IN",
+                        "SOME NOT IN"
+                    ]
+                }
+            },
+            "required": [
+                "tokenType",
+                "value"
+            ]
+        },
+        "investmentProfiles": {
+            "description": "[Deprecated] use investmentCategories instead, because investmentProfiles concept is no longer used",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "investmentProfiles"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tokenType"
+            ]
+        },
+        "investmentCategories": {
+            "type": "object",
+            "description": "Investment categories token, used for referencing investment categories array from form context",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "investmentCategories"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tokenType"
+            ]
+        },
+        "valueFrom": {
+            "type": "object",
+            "description": "Value from token, used for referencing value from form context",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "valueFrom"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string"
                 },
                 "selectedValueFrom": {
                     "description": "Selected value from enum",
                     "type": "string"
-                },
-                "elementId": {
-                    "description": "Element id of schema form element",
+                }
+            },
+            "required": [
+                "tokenType",
+                "value",
+                "selectedValueFrom"
+            ]
+        },
+        "arrayFrom": {
+            "type": "object",
+            "description": "Array from token, used for referencing array from form context",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
                     "type": "string"
                 },
-                "left": {
-                    "description": "left side of expression",
-                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "arrayFrom"
                 },
-                "right": {
-                    "description": "right side of expression",
-                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "string"
                 },
-                "operator": {
-                    "description": "operator between sides of expression",
-                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                "selectedValueFrom": {
+                    "description": "Selected value from enum",
+                    "type": "string"
                 }
             },
-            "if": {
-                "properties": {
-                    "tokenType": {
-                        "enum": [
-                            "group"
-                        ]
-                    }
-                }
-            },
-            "then": {
-                "required": [
-                    "tokenType",
-                    "left",
-                    "right",
-                    "operator"
-                ]
-            },
-            "else": {
-                "if": {
+            "required": [
+                "tokenType",
+                "value",
+                "selectedValueFrom"
+            ]
+        },
+        "condition": {
+            "type": "object",
+            "description": "Condition token",
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "const": "if"
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": "object",
                     "properties": {
-                        "tokenType": {
-                            "enum": [
-                                "element"
-                            ]
-                        }
-                    }
-                },
-                "then": {
-                    "required": [
-                        "tokenType",
-                        "value",
-                        "elementId"
-                    ]
-                },
-                "else": {
-                    "if": {
-                        "properties": {
-                            "tokenType": {
-                                "enum": [
-                                    "value"
+                        "condition": {
+                            "description": "Condition expression, must evaluate to boolean",
+                            "type": "array",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                    }
                                 ]
-                            }
-                        }
-                    },
-                    "then": {
-                        "required": [
-                            "tokenType",
-                            "value",
-                            "valueType"
-                        ]
-                    },
-                    "else": {
-                        "if": {
-                            "properties": {
-                                "tokenType": {
-                                    "enum": [
-                                        "investmentProfiles",
-                                        "investmentCategories"
-                                    ]
-                                }
                             }
                         },
                         "then": {
-                            "required": [
-                                "tokenType"
-                            ]
+                            "description": "Then branch output expression",
+                            "type": "array",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                    }
+                                ]
+                            }
                         },
                         "else": {
-                            "if": {
-                                "properties": {
-                                    "tokenType": {
-                                        "enum": [
-                                            "arrayFrom",
-                                            "valueFrom"
-                                        ]
+                            "description": "Else branch output expression",
+                            "type": "array",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "ref": "./rule-token.schema.json#/definitions/ruleToken"
                                     }
-                                }
-                            },
-                            "then": {
-                                "required": [
-                                    "tokenType",
-                                    "selectedValueFrom",
-                                    "value"
-                                ]
-                            },
-                            "else": {
-                                "required": [
-                                    "tokenType",
-                                    "value"
                                 ]
                             }
                         }
                     }
                 }
-            }
+            },
+            "required": [
+                "tokenType",
+                "value"
+            ]
         }
     }
 }

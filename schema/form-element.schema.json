@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/form-element.schema.json",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/schema/form-element.schema.json",
     "title": "Form element schema",
     "description": "This schema describes single form element of the form.",
     "type": "object",
@@ -131,8 +131,7 @@
                     }
                 },
                 "defaultVisible": {
-                    "$comment": "Deprecated",
-                    "description": "DEPRECATED - Default visibility state of element, not used for anything in the current implementation",
+                    "description": "[Deprecated] Default visibility state of element, not used for anything in the current implementation",
                     "type": "boolean"
                 },
                 "visibilityRules": {
@@ -141,7 +140,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "ref": "./rule-group.schema.json#/definitions/ruleGroup"
+                                "ref": "./rule-token.schema.json#/definitions/group"
                             }
                         ]
                     }

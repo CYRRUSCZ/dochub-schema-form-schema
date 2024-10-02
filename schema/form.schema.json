@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/form.schema.json",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/schema/form.schema.json",
     "title": "DocHub Schema Form JSON schema",
     "description": "This schema describes the form and data structure of a html form used in DocHub. It is used to generate a form using our Vue form renderer in the document.",
     "type": "object",

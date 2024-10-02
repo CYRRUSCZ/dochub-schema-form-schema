@@ -1,11 +1,14 @@
-FROM node:20 as builder
+FROM python:3-bookworm AS builder
 WORKDIR /app
-RUN git clone https://github.com/atlassian-labs/json-schema-viewer.git . && \
-    npm i && \
-    npm run build
+COPY ./ .
+RUN pip install json-schema-for-humans && \
+    mkdir -p ./dist && \
+    generate-schema-doc ./schema/form.schema.json ./dist
 
 FROM node:20
 WORKDIR /app
-COPY --from=builder /app/build /app
+COPY ./server /app
+COPY --from=builder /app/dist /app/public
+RUN npm i
 
-CMD [, ]
+CMD ["npm", "run", "dev"]
