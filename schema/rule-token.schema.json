@@ -1,0 +1,163 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-token.schema.json",
+    "title": "DocHub Schema Form Rule Token JSON schema",
+    "description": "Common rule token schema used in visibility rules group, or expressions of form element schema.",
+    "type": "object",
+    "definitions": {
+        "ruleToken": {
+            "properties": {
+                "id": {
+                    "description": "Optional unique identifier of token, has no meaning for rendering",
+                    "type": "string"
+                },
+                "tokenType": {
+                    "description": "Defines type of token in expression",
+                    "type": "string",
+                    "enum": [
+                        "element",
+                        "value",
+                        "group",
+                        "operator",
+                        "investmentProfiles",
+                        "investmentCategories",
+                        "valueFrom",
+                        "arrayFrom"
+                    ]
+                },
+                "value": {
+                    "description": "Value for use in expression",
+                    "type": [
+                        "number",
+                        "boolean",
+                        "string"
+                    ]
+                },
+                "valueType": {
+                    "description": "Data type of value",
+                    "type": "string",
+                    "enum": [
+                        "string",
+                        "boolean",
+                        "number"
+                    ]
+                },
+                "selectedValueFrom": {
+                    "description": "Selected value from enum",
+                    "type": "string"
+                },
+                "elementId": {
+                    "description": "Element id of schema form element",
+                    "type": "string"
+                },
+                "left": {
+                    "description": "left side of expression",
+                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                },
+                "right": {
+                    "description": "right side of expression",
+                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                },
+                "operator": {
+                    "description": "operator between sides of expression",
+                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                }
+            },
+            "if": {
+                "properties": {
+                    "tokenType": {
+                        "enum": [
+                            "group"
+                        ]
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "tokenType",
+                    "left",
+                    "right",
+                    "operator"
+                ]
+            },
+            "else": {
+                "if": {
+                    "properties": {
+                        "tokenType": {
+                            "enum": [
+                                "element"
+                            ]
+                        }
+                    }
+                },
+                "then": {
+                    "required": [
+                        "tokenType",
+                        "value",
+                        "elementId"
+                    ]
+                },
+                "else": {
+                    "if": {
+                        "properties": {
+                            "tokenType": {
+                                "enum": [
+                                    "value"
+                                ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": [
+                            "tokenType",
+                            "value",
+                            "valueType"
+                        ]
+                    },
+                    "else": {
+                        "if": {
+                            "properties": {
+                                "tokenType": {
+                                    "enum": [
+                                        "investmentProfiles",
+                                        "investmentCategories"
+                                    ]
+                                }
+                            }
+                        },
+                        "then": {
+                            "required": [
+                                "tokenType"
+                            ]
+                        },
+                        "else": {
+                            "if": {
+                                "properties": {
+                                    "tokenType": {
+                                        "enum": [
+                                            "arrayFrom",
+                                            "valueFrom"
+                                        ]
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "tokenType",
+                                    "selectedValueFrom",
+                                    "value"
+                                ]
+                            },
+                            "else": {
+                                "required": [
+                                    "tokenType",
+                                    "value"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

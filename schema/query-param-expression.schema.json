@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/query-param-expression.schema.json",
+    "title": "DocHub Schema Form Query Param Expression JSON schema",
+    "description": "This schema describes the query param expression structure used in form element schema.",
+    "definitions": {
+        "queryParamExpression": {
+            "type": "object",
+            "properties": {
+                "parameter": {
+                    "description": "Name of query parameter to be produced by expression",
+                    "type": "string"
+                },
+                "parameterExpression": {
+                    "description": "Definition of parameter computed value expression",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "parameter",
+                "parameterExpression"
+            ]
+        }
+    }
+}

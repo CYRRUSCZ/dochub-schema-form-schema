@@ -1,0 +1,290 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/form-element.schema.json",
+    "title": "Form element schema",
+    "description": "This schema describes single form element of the form.",
+    "type": "object",
+    "definitions": {
+        "formElement": {
+            "properties": {
+                "elementId": {
+                    "description": "Form element html id attribute, this attribute is also used as the key in the form data model",
+                    "type": "string"
+                },
+                "elementType": {
+                    "description": "Type of form html element, fileSelect and stockSelect are not used in the DocHub documents, so it is not necessary to implement them",
+                    "type": "string",
+                    "enum": [
+                        "text",
+                        "date",
+                        "textarea",
+                        "number",
+                        "select",
+                        "email",
+                        "radio",
+                        "checkbox",
+                        "checkboxGroup",
+                        "computedText",
+                        "investmentCategoriesSelector",
+                        "fileSelect",
+                        "imageRadio",
+                        "stockSelect",
+                        "etfWeight",
+                        "apiCallbackComputedText"
+                    ]
+                },
+                "elementLabel": {
+                    "description": "Text of the label, for radio and checkboxGroup elements, this is the label of the group",
+                    "type": "string"
+                },
+                "elementSize": {
+                    "description": "Optional size of element",
+                    "enum": [
+                        "sm",
+                        "md",
+                        "lg",
+                        "null"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "hasHint": {
+                    "description": "Indication if element has hint text",
+                    "type": "boolean"
+                },
+                "elementHint": {
+                    "description": "Hint content that should be rendered under the input element",
+                    "type": "string"
+                },
+                "customClasses": {
+                    "description": "Custom css class names for element root element, can be ignored for external usage",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "vertical": {
+                    "description": "Vertical orientation of radio or checkboxGroup element options",
+                    "type": "boolean"
+                },
+                "defaultValue": {
+                    "description": "Default value of element, before the first render, this value is set to the form data model",
+                    "type": [
+                        "string",
+                        "integer",
+                        "boolean",
+                        "null",
+                        "number",
+                        "array"
+                    ]
+                },
+                "validationRules": {
+                    "description": "Array of rule definitions for validating element value, our form renderer uses Vuelidate for validation",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "ref": "./validation-rule.schema.json#/definitions/validationRule"
+                            }
+                        ]
+                    }
+                },
+                "elementOptions": {
+                    "description": "Options used for select, checkboxGroup, radio or imageRadio elements",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "option": {
+                                "description": "Textual representation of value (ex. option for select, label for checkbox group checkbox, label for radio button)",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "String value for form element model",
+                                "type": "string"
+                            },
+                            "src": {
+                                "description": "Source image url for form element model",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "option",
+                            "value"
+                        ],
+                        "if": {
+                            "properties": {
+                                "elementType": {
+                                    "const": "imageRadio"
+                                }
+                            }
+                        },
+                        "then": {
+                            "required": [
+                                "option",
+                                "value",
+                                "src"
+                            ]
+                        }
+                    }
+                },
+                "defaultVisible": {
+                    "$comment": "Deprecated",
+                    "description": "DEPRECATED - Default visibility state of element, not used for anything in the current implementation",
+                    "type": "boolean"
+                },
+                "visibilityRules": {
+                    "description": "Array of visibility rule definitions used for showing or hiding element, if empty, element is always visible otherwise it is hidden until all rules return true (logic AND)",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "ref": "./rule-group.schema.json#/definitions/ruleGroup"
+                            }
+                        ]
+                    }
+                },
+                "selectPrompt": {
+                    "description": "Prompt message for select input element",
+                    "type": "string"
+                },
+                "portalId": {
+                    "description": "Id of Vue portal (Teleport) for form renderer, can be ignored for rendering outside DocHub document",
+                    "type": "string"
+                },
+                "isComputed": {
+                    "description": "Indication if element value should be computed, computed fields are not editable and calculations always produces only float numbers, not awailable for fields other than text inputs",
+                    "type": "boolean"
+                },
+                "computedValueExpression": {
+                    "description": "Definition of computed value expression",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                            }
+                        ]
+                    }
+                },
+                "selectAnyFile": {
+                    "description": "Indicator for selecting any file type for file select element type",
+                    "type": "boolean"
+                },
+                "hasStock": {
+                    "description": "Indicator for any element if it should be linked to any stock record id. Used for stock select element type, not used in DocHub documents",
+                    "type": "boolean"
+                },
+                "stockId": {
+                    "description": "Id of selected stock for stock select",
+                    "type": ["string", "null"]
+                },
+                "apiUrl": {
+                    "description": "Url for api callback computed text element type, currently not implemented, planned for future use",
+                    "type": "string"
+                },
+                "apiQueryParamsExpressions": {
+                    "description": "Array of expressions for api query params, currently not implemented, planned for future use",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "ref": "./query-param-expression.schema.json#/definitions/queryParamExpression"
+                            }
+                        ]
+                    }
+                }
+            },
+            "if": {
+                "properties": {
+                    "elementType": {
+                        "enum": [
+                            "text",
+                            "textarea",
+                            "number",
+                            "email",
+                            "checkbox",
+                            "date",
+                            "computedText",
+                            "fileSelect",
+                            "stockSelect",
+                            "etfWeight"
+                        ]
+                    }
+                }
+            },
+            "then": {
+                "if": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "elementType": {
+                                    "enum": [
+                                        "computedText",
+                                        "apiCallbackComputedText"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "isComputed": {
+                                    "const": true
+                                }
+                            }
+                        }
+                    ]
+                },
+                "then": {
+                    "if": {
+                        "properties": {
+                            "elementType": {
+                                "const": "apiCallbackComputedText"
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": [
+                            "elementId",
+                            "elementType",
+                            "validationRules",
+                            "visibilityRules",
+                            "isComputed",
+                            "apiUrl",
+                            "apiQueryParamsExpressions"
+                        ]
+                    },
+                    "else": {
+                        "required": [
+                            "elementId",
+                            "elementType",
+                            "validationRules",
+                            "visibilityRules",
+                            "isComputed",
+                            "computedValueExpression"
+                        ]
+                    }
+                },
+                "else": {
+                    "required": [
+                        "elementId",
+                        "elementType",
+                        "validationRules",
+                        "visibilityRules"
+                    ]
+                }
+            },
+            "else": {
+                "required": [
+                    "elementId",
+                    "elementType",
+                    "validationRules",
+                    "visibilityRules",
+                    "elementOptions"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/form.schema.json",
+    "title": "DocHub Schema Form JSON schema",
+    "description": "This schema describes the form and data structure of a html form used in DocHub. It is used to generate a form using our Vue form renderer in the document.",
+    "type": "object",
+    "properties": {
+        "formId": {
+            "description": "Form html id attribute, has no special meaning",
+            "type": "string"
+        },
+        "formElements": {
+            "description": "Array of objects containing form element schema definitions, elements are rendered in the same order as they are defined",
+            "type": "array",
+            "items": {
+                "description": "Form element schema",
+                "ref": "./form-element.schema.json#/definitions/formElement"
+            },
+            "uniqueItems": true
+        },
+        "submitText": {
+            "description": "Text on submit button",
+            "type": "string"
+        },
+        "cancelText": {
+            "description": "Text on cancel button, if not present, cancel button is not rendered",
+            "type": "string"
+        }
+    },
+    "required": [
+        "formElements",
+        "submitText"
+    ]
+}

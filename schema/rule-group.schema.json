@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/CYRRUSCZ/dochub-schema-form-schema/refs/heads/master/rule-group.schema.json",
+    "title": "DocHub Schema Form Rule Group JSON schema",
+    "description": "This schema describes the grouped rules used in visibility rules array of form element schema.",
+    "type": "object",
+    "definitions": {
+        "ruleGroup": {
+            "properties": {
+                "tokenType": {
+                    "description": "Defines type of rule group",
+                    "type": "string",
+                    "enum": [
+                        "group"
+                    ]
+                },
+                "left": {
+                    "description": "Left side of expression",
+                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                },
+                "right": {
+                    "description": "Right side of expression",
+                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                },
+                "operator": {
+                    "description": "Defines operator between expression sides",
+                    "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                }
+            }
+        }
+    }
+}
