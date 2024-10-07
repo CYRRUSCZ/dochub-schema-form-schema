@@ -86,7 +86,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "ref": "./validation-rule.schema.json#/definitions/validationRule"
+                                "$ref": "./validation-rule.schema.json#/definitions/validationRule"
                             }
                         ]
                     }
@@ -140,7 +140,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "ref": "./rule-token.schema.json#/definitions/group"
+                                "$ref": "./rule-token.schema.json#/definitions/group"
                             }
                         ]
                     }
@@ -163,7 +163,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                "$ref": "./rule-token.schema.json#/definitions/ruleToken"
                             }
                         ]
                     }
@@ -190,7 +190,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "ref": "./query-param-expression.schema.json#/definitions/queryParamExpression"
+                                "$ref": "./query-param-expression.schema.json#/definitions/queryParamExpression"
                             }
                         ]
                     }

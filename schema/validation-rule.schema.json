@@ -8,13 +8,13 @@
         "validationRule": {
             "oneOf": [
                 {
-                    "ref": "./validation-rule.schema.json#/definitions/simpleValidationRule"
+                    "$ref": "./validation-rule.schema.json#/definitions/simpleValidationRule"
                 },
                 {
-                    "ref": "./validation-rule.schema.json#/definitions/parametrizedValidationRule"
+                    "$ref": "./validation-rule.schema.json#/definitions/parametrizedValidationRule"
                 },
                 {
-                    "ref": "./validation-rule.schema.json#/definitions/expressionValidationRule"
+                    "$ref": "./validation-rule.schema.json#/definitions/expressionValidationRule"
                 }
             ]
         },
@@ -60,7 +60,7 @@
                 },
                 "ruleExpression": {
                     "description": "Rule expression group",
-                    "ref": "./rule-token.schema.json#/definitions/group"
+                    "$ref": "./rule-token.schema.json#/definitions/group"
                 },
                 "errorMessage": {
                     "description": "Message displayed to user on error state",

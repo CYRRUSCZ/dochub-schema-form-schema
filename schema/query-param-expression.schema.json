@@ -17,7 +17,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                "$ref": "./rule-token.schema.json#/definitions/ruleToken"
                             }
                         ]
                     }

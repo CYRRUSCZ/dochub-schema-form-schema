@@ -2,7 +2,6 @@ import { createServer } from 'http'
 import { toNodeListener } from 'h3'
 import { createServerApp } from './server'
 
-
 function shutdown () {
   console.log('Shutting down...')
   process.exit(0)
@@ -19,6 +18,6 @@ createServer(toNodeListener(app))
         '0.0.0.0',
         undefined,
         () => {
-            console.log(`Server running at http://0.0.0.0:3000`)
+            console.log('Server running at http://0.0.0.0:3000')
         }
     )

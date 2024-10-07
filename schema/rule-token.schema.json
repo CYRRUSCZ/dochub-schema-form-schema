@@ -8,59 +8,59 @@
         "groupSide": {
             "oneOf": [
                 {
-                    "ref": "./rule-token.schema.json#/definitions/element"
+                    "$ref": "./rule-token.schema.json#/definitions/element"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/group"
+                    "$ref": "./rule-token.schema.json#/definitions/group"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/value"
+                    "$ref": "./rule-token.schema.json#/definitions/value"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/investmentProfiles"
+                    "$ref": "./rule-token.schema.json#/definitions/investmentProfiles"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/investmentCategories"
+                    "$ref": "./rule-token.schema.json#/definitions/investmentCategories"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/valueFrom"
+                    "$ref": "./rule-token.schema.json#/definitions/valueFrom"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/arrayFrom"
+                    "$ref": "./rule-token.schema.json#/definitions/arrayFrom"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/condition"
+                    "$ref": "./rule-token.schema.json#/definitions/condition"
                 }
             ]
         },
         "ruleToken": {
             "oneOf": [
                 {
-                    "ref": "./rule-token.schema.json#/definitions/element"
+                    "$ref": "./rule-token.schema.json#/definitions/element"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/value"
+                    "$ref": "./rule-token.schema.json#/definitions/value"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/group"
+                    "$ref": "./rule-token.schema.json#/definitions/group"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/operator"
+                    "$ref": "./rule-token.schema.json#/definitions/operator"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/investmentProfiles"
+                    "$ref": "./rule-token.schema.json#/definitions/investmentProfiles"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/investmentCategories"
+                    "$ref": "./rule-token.schema.json#/definitions/investmentCategories"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/valueFrom"
+                    "$ref": "./rule-token.schema.json#/definitions/valueFrom"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/arrayFrom"
+                    "$ref": "./rule-token.schema.json#/definitions/arrayFrom"
                 },
                 {
-                    "ref": "./rule-token.schema.json#/definitions/condition"
+                    "$ref": "./rule-token.schema.json#/definitions/condition"
                 }
             ]
         },
@@ -145,15 +145,15 @@
                 },
                 "left": {
                     "description": "left side of expression",
-                    "ref": "./rule-token.schema.json#/definitions/groupSide"
+                    "$ref": "./rule-token.schema.json#/definitions/groupSide"
                 },
                 "right": {
                     "description": "right side of expression",
-                    "ref": "./rule-token.schema.json#/definitions/groupSide"
+                    "$ref": "./rule-token.schema.json#/definitions/groupSide"
                 },
                 "operator": {
                     "description": "operator between sides of expression",
-                    "ref": ".#/definitions/operator"
+                    "$ref": ".#/definitions/operator"
                 }
             },
             "required": [
@@ -408,7 +408,7 @@
                             "items": {
                                 "allOf": [
                                     {
-                                        "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                        "$ref": "./rule-token.schema.json#/definitions/ruleToken"
                                     }
                                 ]
                             }
@@ -419,7 +419,7 @@
                             "items": {
                                 "allOf": [
                                     {
-                                        "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                        "$ref": "./rule-token.schema.json#/definitions/ruleToken"
                                     }
                                 ]
                             }
@@ -430,7 +430,7 @@
                             "items": {
                                 "allOf": [
                                     {
-                                        "ref": "./rule-token.schema.json#/definitions/ruleToken"
+                                        "$ref": "./rule-token.schema.json#/definitions/ruleToken"
                                     }
                                 ]
                             }
