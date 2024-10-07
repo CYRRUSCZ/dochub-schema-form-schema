@@ -13,3 +13,5 @@ docker compose up
 ```
 
 Following these steps, local server should be attached to http://localhost:3000
+
+![screenshot](image.png)
