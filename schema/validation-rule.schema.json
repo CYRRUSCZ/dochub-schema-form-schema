@@ -83,7 +83,9 @@
                         "float",
                         "date",
                         "dateTime",
-                        "numeric"
+                        "numeric",
+                        "iban",
+                        "swift"
                     ]
                 },
                 "errorMessage": {

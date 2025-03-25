@@ -9,6 +9,10 @@
             "description": "Form html id attribute, has no special meaning",
             "type": "string"
         },
+        "version": {
+            "description": "Version of the form schema, default version fallbacks to 1.0.0",
+            "type": "string"
+        },
         "formElements": {
             "description": "Array of objects containing form element schema definitions, elements are rendered in the same order as they are defined",
             "type": "array",
