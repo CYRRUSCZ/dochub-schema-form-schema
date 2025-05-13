@@ -15,6 +15,7 @@
                     "description": "Type of form html element, fileSelect and stockSelect are not used in the DocHub documents, so it is not necessary to implement them",
                     "type": "string",
                     "enum": [
+                        "fieldset",
                         "text",
                         "date",
                         "textarea",
@@ -30,7 +31,7 @@
                         "imageRadio",
                         "stockSelect",
                         "etfWeight",
-                        "apiCallbackComputedText"
+                        "remoteComputedText"
                     ]
                 },
                 "elementLabel": {
@@ -91,6 +92,17 @@
                         ]
                     }
                 },
+                "valueIncludeRules": {
+                    "description": "Array of rule definitions for validating if the element value should be included in the form data output",
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "./validation-rule.schema.json#/definitions/validationRule"
+                            }
+                        ]
+                    }
+                },
                 "elementOptions": {
                     "description": "Options used for select, checkboxGroup, radio or imageRadio elements",
                     "type": "array",
@@ -108,6 +120,10 @@
                             "src": {
                                 "description": "Source image url for form element model",
                                 "type": "string"
+                            },
+                            "disabled": {
+                                "description": "Indication if option is disabled",
+                                "type": "boolean"
                             }
                         },
                         "required": [
@@ -180,26 +196,20 @@
                     "description": "Id of selected stock for stock select",
                     "type": ["string", "null"]
                 },
-                "apiUrl": {
-                    "description": "Url for api callback computed text element type, currently not implemented, planned for future use",
+                "remoteComputedFn": {
+                    "description": "Function name for remote computed text element type",
                     "type": "string"
                 },
-                "apiQueryParamsExpressions": {
-                    "description": "Array of expressions for api query params, currently not implemented, planned for future use",
-                    "type": "array",
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "./query-param-expression.schema.json#/definitions/queryParamExpression"
-                            }
-                        ]
-                    }
+                "remoteComputedTextParams": {
+                    "description": "Parameters for remote computed text element type, used for passing values to the function",
+                    "type": "string"
                 }
             },
             "if": {
                 "properties": {
                     "elementType": {
                         "enum": [
+                            "fieldset",
                             "text",
                             "textarea",
                             "number",
@@ -222,7 +232,7 @@
                                 "elementType": {
                                     "enum": [
                                         "computedText",
-                                        "apiCallbackComputedText"
+                                        "remoteComputedText"
                                     ]
                                 }
                             }
@@ -240,7 +250,7 @@
                     "if": {
                         "properties": {
                             "elementType": {
-                                "const": "apiCallbackComputedText"
+                                "const": "remoteComputedText"
                             }
                         }
                     },
@@ -248,19 +258,15 @@
                         "required": [
                             "elementId",
                             "elementType",
-                            "validationRules",
-                            "visibilityRules",
                             "isComputed",
-                            "apiUrl",
-                            "apiQueryParamsExpressions"
+                            "remoteComputedFn",
+                            "remoteComputedTextParams"
                         ]
                     },
                     "else": {
                         "required": [
                             "elementId",
                             "elementType",
-                            "validationRules",
-                            "visibilityRules",
                             "isComputed",
                             "computedValueExpression"
                         ]
@@ -269,9 +275,7 @@
                 "else": {
                     "required": [
                         "elementId",
-                        "elementType",
-                        "validationRules",
-                        "visibilityRules"
+                        "elementType"
                     ]
                 }
             },
@@ -279,8 +283,6 @@
                 "required": [
                     "elementId",
                     "elementType",
-                    "validationRules",
-                    "visibilityRules",
                     "elementOptions"
                 ]
             }
